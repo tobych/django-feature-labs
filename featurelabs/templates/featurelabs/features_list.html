@@ -3,6 +3,7 @@
 {% for feature, status in feature_list %}
   <p><strong>{{ feature }}</strong>
   {{ status.enabled|yesno:"enabled,disabled" }} ({{ status.source }})
+	{% if status.user %}(user){% endif %}
   {% if not status.enabled %}
     <a href="?enable_{{ feature.name }}">enable with URL</a>
   {% endif %}
