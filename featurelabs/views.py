@@ -3,24 +3,18 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
 from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-
 from featureflipper.models import Feature
 
 
-def index(request, *args, **kw):
-    template_name = 'featurelabs/index.html'
+def index(request):
     feature_list = [
         (feature, {
-            'site': feature.enabled,
-            'session': request.features[feature.name],
-        })
+                'enabled': request.features_panel.enabled(feature.name),
+                'source': request.features_panel.source(feature.name)
+                })
         for feature in Feature.objects.all()
     ]
-    template_context = {
-        'feature_list': feature_list,
-    }
-    return render_to_response(
-        template_name,
-        template_context,
-        RequestContext(request),
-    )
+    return render_to_response('featurelabs/index.html', {
+            'feature_list': feature_list,
+            'features_panel': request.features_panel,
+            },  context_instance=RequestContext(request))

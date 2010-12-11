@@ -68,7 +68,8 @@ MIDDLEWARE_CLASSES = (
     'featureflipper.middleware.FeaturesMiddleware',
 )
 
-TEMPLATE_CONTEXT_PREPROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
     'featureflipper.context_processors.features',
 )
 
@@ -81,7 +82,8 @@ TEMPLATE_DIRS = (
     os.path.join(PROJ_ROOT, 'templates'),
 )
 
-FEATURES_FILE = os.path.join(PROJ_ROOT, 'features.json')
+FEATURE_FLIPPER_FEATURES_FILE = os.path.join(PROJ_ROOT, 'features.json')
+FEATURE_FLIPPER_ANONYMOUS_URL_FLIPPING = True
 
 INSTALLED_APPS = (
     'django.contrib.admin',

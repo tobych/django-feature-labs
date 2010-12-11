@@ -1,0 +1,14 @@
+<h2>Features</h2>
+
+{% for feature, status in feature_list %}
+  <p><strong>{{ feature }}</strong>
+  {{ status.enabled|yesno:"enabled,disabled" }} ({{ status.source }})
+  {% if not status.enabled %}
+    <a href="?enable_{{ feature.name }}">enable with URL</a>
+  {% endif %}
+  {% if not status.enabled or status.source == 'url' %}
+      <a href="?session_enable_{{ feature.name }}">enable for session</a>
+  {% endif %}
+  {% if feature.description %}<br/><em>{{ feature.description }}</em>{% endif %}
+  </p>
+{% endfor %}

@@ -3,5 +3,6 @@
 {% block head_title %}Features{% endblock %}
 
 {% block content %}
-{% include "featurelabs/features_table.html" %}
+{% include "featurelabs/features_list.html" %}
+<p><a href="?session_clear_features">Remove all feature settings from session</a></p>
 {% endblock %}
