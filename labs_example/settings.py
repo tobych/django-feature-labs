@@ -94,3 +94,5 @@ INSTALLED_APPS = (
     'featureflipper',
     'featurelabs',
 )
+
+LOGIN_URL = '/admin/'

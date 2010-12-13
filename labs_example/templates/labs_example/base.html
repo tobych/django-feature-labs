@@ -1,0 +1,21 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	{% block extrahead %}{% endblock %}
+</head>
+<body>
+
+<p>
+{% if user.is_authenticated %}
+  <strong>{{ user }}</strong> <a href="/admin/logout/">Logout</a>
+{% else %}
+  <a href="/admin/">Login</a>
+{% endif %}
+</p>
+
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "labs_example/base.html" %}
+
+{% block head_title %}Home{% endblock %}
+
+{% block content %}
+<p><a href="/features/">Labs</a></p>
+{% if features.feature1 %}<p>Feature 1</p>{% endif %}
+{% if features.feature2 %}<p>Feature 2</p>{% endif %}
+{% if features.feature3 %}<p>Feature 3</p>{% endif %}
+{% endblock %}

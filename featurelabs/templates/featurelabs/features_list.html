@@ -1,15 +1,20 @@
 <h2>Features</h2>
 
-{% for feature, status in feature_list %}
-  <p><strong>{{ feature }}</strong>
-  {{ status.enabled|yesno:"enabled,disabled" }} ({{ status.source }})
-	{% if status.user %}(user){% endif %}
-  {% if not status.enabled %}
-    <a href="?enable_{{ feature.name }}">enable with URL</a>
-  {% endif %}
-  {% if not status.enabled or status.source == 'url' %}
-      <a href="?session_enable_{{ feature.name }}">enable for session</a>
-  {% endif %}
-  {% if feature.description %}<br/><em>{{ feature.description }}</em>{% endif %}
-  </p>
-{% endfor %}
+<form method="post" action="">
+  {{ formset.management_form }}
+  <p><input type="submit" value="Save Changes"> or <a href="/admin/featurelabs/enabledfeature/">Cancel</a></p>
+  {% for feature, meta in feature_list %}
+    <p><strong>{{ feature }}</strong>
+    {{ meta.enabled|yesno:"enabled,disabled" }} ({{ meta.source }})
+    {% if not meta.enabled %}
+      <a href="?enable_{{ feature.name }}">enable with URL</a>
+    {% endif %}
+    {% if not meta.enabled or meta.source == 'url' %}
+	<a href="?session_enable_{{ feature.name }}">enable for session</a>
+    {% endif %}
+    {% if feature.description %}<br/><em>{{ feature.description }}</em>{% endif %}
+    </p>
+    {{ meta.form }}
+  {% endfor %}
+  <p><input type="submit" value="Save Changes"> or <a href="/admin/featurelabs/enabledfeature/">Cancel</a></p>
+</form>
